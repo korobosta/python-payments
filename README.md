@@ -1,6 +1,6 @@
 # koros_python_payments
 
-A simple example project with two packages.
+A python package for connecting to payments platforms like MPESA,PayPal,RazorPay
 
 ## Installation
 
@@ -67,5 +67,29 @@ MPESA_LIVE_TRANSACTION_QUERY_COMMAND_ID = "TransactionStatusQuery"
 MPESA_LIVE_TRANSACTION_QUERY_TRANSACTION_CODE = "OEI2AK4Q16"
 MPESA_LIVE_TRANSACTION_QUERY_PARTY_A=
 MPESA_LIVE_TRANSACTION_ORIGINATOR_CONVERSATION_ID = ""
+```
+
+
+## Make STK Push/ Request payment from user
+
+```python
+
+from mpesa.customer_to_business import CustomerToBusiness
+
+response_code = None
+amount = 1
+phone = "254712345678"
+bill_reference = "12345"
+customer_to_business=CustomerToBusiness()
+repsonse=customer_to_business.stk_push(amount,phone,bill_reference)
+if 'ResponseCode' in repsonse:
+    response_code = repsonse["ResponseCode"]
+    if response_code == "0":
+        customerMessage = response.get("CustomerMessage","")
+        print(customerMessage)
+    else:
+        errorMessage = response.get("errorMessage","")
+        print(errorMessage)
+
 ```
 

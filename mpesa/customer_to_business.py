@@ -44,6 +44,6 @@ class CustomerToBusiness:
         }
 		response = requests.post(api_url, json = request, headers=headers)
 		json_response = response.json()
-		# print(json_response)
+		print(json_response)
 		return (json_response)
 	    
