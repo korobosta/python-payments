@@ -76,20 +76,23 @@ MPESA_LIVE_TRANSACTION_ORIGINATOR_CONVERSATION_ID = ""
 
 from mpesa.customer_to_business import CustomerToBusiness
 
-response_code = None
-amount = 1
-phone = "254712345678"
-bill_reference = "12345"
-customer_to_business=CustomerToBusiness()
-repsonse=customer_to_business.stk_push(amount,phone,bill_reference)
-if 'ResponseCode' in repsonse:
-    response_code = repsonse["ResponseCode"]
-    if response_code == "0":
-        customerMessage = response.get("CustomerMessage","")
-        print(customerMessage)
-    else:
-        errorMessage = response.get("errorMessage","")
-        print(errorMessage)
+def make_skt_push():
+    response_code = None
+    amount = 1
+    phone = "254712345678"
+    bill_reference = "12345"
+    customer_to_business=CustomerToBusiness()
+    repsonse=customer_to_business.stk_push(amount,phone,bill_reference)
+    if 'ResponseCode' in repsonse:
+        response_code = repsonse["ResponseCode"]
+        if response_code == "0":
+            #Request was  successful, stk sent to customer
+            customerMessage = response.get("CustomerMessage","")
+            print(customerMessage)
+        else:
+            #Request was not successful, stk sent to customer
+            errorMessage = response.get("errorMessage","")
+            print(errorMessage)
 
 ```
 
